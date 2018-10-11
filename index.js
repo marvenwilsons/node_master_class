@@ -20,14 +20,14 @@ const server = http.createServer((req,res) => {
     // Get the http Method
     const method = req.method.toLocaleLowerCase()
 
+    // Get the headers as an object
+    const headers = req.headers
 
     // send the response
     res.end('hello world\n')
 
     // log the request path
-    console.log(`request received: ${trimedPath === '' ? 'home' : trimedPath}`)
-    console.log(`request: ${method}`)
-    console.log(queryStringObject)
+    console.log(headers)
 
 })
 
