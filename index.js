@@ -13,6 +13,10 @@ const server = http.createServer((req,res) => {
     const path = parsedUrl.pathname
     const trimedPath = path.replace(/^\/+|\/+$/g,'')
 
+    // get the query string as an object
+    // url?key=value <- from client
+    let queryStringObject = parsedUrl.query
+
     // Get the http Method
     const method = req.method.toLocaleLowerCase()
 
@@ -22,7 +26,8 @@ const server = http.createServer((req,res) => {
 
     // log the request path
     console.log(`request received: ${trimedPath === '' ? 'home' : trimedPath}`)
-    console.log(`request ${method}`)
+    console.log(`request: ${method}`)
+    console.log(queryStringObject)
 
 })
 
