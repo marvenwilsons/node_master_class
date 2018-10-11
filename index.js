@@ -13,11 +13,16 @@ const server = http.createServer((req,res) => {
     const path = parsedUrl.pathname
     const trimedPath = path.replace(/^\/+|\/+$/g,'')
 
+    // Get the http Method
+    const method = req.method.toLocaleLowerCase()
+
+
     // send the response
     res.end('hello world\n')
 
     // log the request path
     console.log(`request received: ${trimedPath === '' ? 'home' : trimedPath}`)
+    console.log(`request ${method}`)
 
 })
 
