@@ -2,13 +2,41 @@
 
 // dependencies
 const http = require('http')
+const https = require('https')
 const url = require('url')
 const stringDecoder = require('string_decoder').StringDecoder
 const config = require('./config')
+const fs = require('fs')
 
 
-// the server should respond to all request with a string
-const server = http.createServer((req, res) => {
+// Instantiating the HTTP server
+const httpServer = http.createServer((req, res) => {
+    unifiedServer(req,res)
+})
+
+// start the server, and have it listen on choosen configuration
+httpServer.listen(config.httpPort, (req, res) => {
+    console.log("The server is litening to port "+config.httpPort+" ")
+})
+
+// Instantiate the HTTPS server
+const httpsServerOptions = {
+    key: fs.readFileSync('./https/key.pem'),
+    cert: fs.readFileSync('./https/cert.pem')
+}
+
+const httpsServer = https.createServer(httpsServerOptions,(req, res) => {
+    unifiedServer(req,res)
+})
+
+// start the server, and have it listen on choosen configuration
+httpsServer.listen(config.httpsPort, (req, res) => {
+    console.log("The server is litening to port "+config.httpsPort+" ")
+})
+
+
+// All the server logic for both https serve
+const unifiedServer = (req, res) => {
     // get the url and parse it
     const parsedUrl = url.parse(req.url, true)
 
@@ -70,13 +98,7 @@ const server = http.createServer((req, res) => {
         })
         
     })
-
-})
-
-// start the server, and have it listen on choosen configuration
-server.listen(config.port, (req, res) => {
-    console.log("The server is litening to port "+config.port+" in "+config.envName+" mode")
-})
+}
 
 // Define handlers
 let handlers = {}
