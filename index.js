@@ -35,7 +35,7 @@ const server = http.createServer((req, res) => {
 
         // choose the handler this request should go to,
         // if one is not found go to not found handler
-        let chosebHandler = typeof(router[trimedPath]) !== 'undefined' ? 
+        let chosenHandler = typeof(router[trimedPath]) !== 'undefined' ? 
         router[trimedPath] : handlers.notFound
 
         // Construct the data object to send to the handler
@@ -47,7 +47,7 @@ const server = http.createServer((req, res) => {
         }
 
         // Route the request to the handler specified in the router
-        chosebHandler(data,(statusCode,payload)=> {
+        chosenHandler(data,(statusCode,payload)=> {
             // Use the status code callde back by the handler or default to 200
             statusCode = typeof(statusCode) == 'number' ? statusCode : 200
 
