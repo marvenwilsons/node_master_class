@@ -73,9 +73,9 @@ const server = http.createServer((req, res) => {
 
 })
 
-// start the server, and have it listen on port 3000
-server.listen(3000, (req, res) => {
-    console.log('The server is litening to port 3000 now')
+// start the server, and have it listen on choosen configuration
+server.listen(config.port, (req, res) => {
+    console.log("The server is litening to port "+config.port+" in "+config.envName+" mode")
 })
 
 // Define handlers
