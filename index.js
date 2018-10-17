@@ -58,6 +58,8 @@ const server = http.createServer((req, res) => {
             const payloadtString = JSON.stringify(payload)
 
             // return the response
+            // set wahat content type will of what the user will be receiving on the response
+            res.setHeader('Content-Type','application/json')
             res.writeHead(statusCode)
             res.end(payloadtString)
 
