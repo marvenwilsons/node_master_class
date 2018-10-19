@@ -71,7 +71,8 @@ const unifiedServer = (req, res) => {
 
         // Construct the data object to send to the handler
         let data = {
-            trimedPath: queryStringObject,
+            trimedPath,
+            queryStringObject,
             method: method,
             header: headers,
             payload: helpers.parseJsonToObject(buffer)
